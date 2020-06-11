@@ -1,33 +1,43 @@
-var sortColors = function (nums) {
-    let j = 0;
-
-    for (let i = 0; i < nums.length; i++) {
-        if (nums[j] == 0) {
-            nums.splice(j, 1);
-            nums.splice(0, 0, 0);
-            j++;
-        } else if (nums[j] == 2) {
-            nums.splice(j, 1);
-            nums.push(2);
-        } else if (nums[j] == 1) {
-            j++;
+var maxArea = function (h, w, horizontalCuts, verticalCuts) {
+    const modus = 1000000007;
+    horizontalCuts.sort(a,b => a-b);
+    verticalCuts.sort(a,b => a-b);
+    let maxH;
+    let maxV;
+    if (horizontalCuts.length == 1) {
+        if (horizontalCuts[0] > w- horizontalCuts[0]) {
+            maxH = horizontalCuts[0];
+        } else {
+            maxH = w- horizontalCuts[0];
+        }
+    } else {
+        maxH = horizontalCuts[1] - horizontalCuts[0];
+        for (let w= 2; w< horizontalCuts.length; h++) {
+            if (horizontalCuts[h] - horizontalCuts[h - 1] > maxH) {
+                maxH = horizontalCuts[h] - horizontalCuts[h - 1];
+            }
+        }
+        if (h - horizontalCuts[horizontalCuts.length - 1] > maxH) {
+            maxH = w - horizontalCuts[horizontalCuts.length - 1];
         }
     }
-    return nums;
+    if (verticalCuts.length == 1) {
+        if (verticalCuts[0] > h - verticalCuts[0]) {
+            maxV = verticalCuts[0];
+        } else {
+            maxV = h - verticalCuts[0];
+        }
+    } else {
+        maxV = verticalCuts[1] - verticalCuts[0];
+        for (let v = 2; v < verticalCuts.length; v++) {
+            if (verticalCuts[v] - verticalCuts[v - 1] > maxV) {
+                maxV = verticalCuts[v] - verticalCuts[v - 1];
+            }
+        }
+        if (h - verticalCuts[verticalCuts.length - 1] > maxV) {
+            maxV = h - verticalCuts[verticalCuts.length - 1];
+        }
+    }
+
+    return (maxH % modus) * (maxV % modus);
 };
-
-// Given an array with n objects colored red, white or blue, sort them in-place so that objects of the same color are adjacent, with the colors in the order red, white and blue.
-
-// Here, we will use the integers 0, 1, and 2 to represent the color red, white, and blue respectively.
-
-// Note: You are not suppose to use the library's sort function for this problem.
-
-// Example:
-
-// Input: [2,0,2,1,1,0]
-// Output: [0,0,1,1,2,2]
-// Follow up:
-
-// A rather straight forward solution is a two-pass algorithm using counting sort.
-// First, iterate the array counting number of 0's, 1's, and 2's, then overwrite array with total number of 0's, then 1's and followed by 2's.
-// Could you come up with a one-pass algorithm using only constant space?
