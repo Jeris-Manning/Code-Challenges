@@ -25,10 +25,10 @@ var getAllElements = function (root1, root2) {
         console.log(treeArr);
         if (root) {
             treeArr.push(root.val);
-        }
 
-        traverse(root.left, treeArr);
-        traverse(root.right, treeArr);
+            traverse(root.left, treeArr);
+            traverse(root.right, treeArr);
+        }
     };
 
     traverse(root1, treeArr);
@@ -37,4 +37,31 @@ var getAllElements = function (root1, root2) {
     console.log(treeArr, "TREE TWO");
     treeArr = treeArr.sort((a, b) => a - b);
     return treeArr;
+};
+
+// 333333333333333333333333333333333333333333333333
+
+var canReach = function(arr, start) {
+  let target;
+  let plat;
+  let plats
+  if (arr.includes(0) == false) {
+    return false;
+  } else {
+    target = arr.indexOf(0);
+    var jumping = function(idx) {
+      if (idx == start) {
+        return true;
+      }
+      plat = idx + arr[idx];
+      plats = idx - arr[idx];
+      if (arr.includes(plat)) {
+        jumping(arr.indexOf(plat));
+      }
+      if (arr.includes(plats)) {
+        jumping(arr.indexOf(plats));
+      }
+    }
+  }
+  return false;
 };
