@@ -53,7 +53,8 @@ function minimumBribes(q) {
         while (q[i] != p) {
             moves++;
             if (moves >= 3) {
-                return "Too chaotic";
+                console.log("Too chaotic");
+                return "CHAOS";
             }
             if (q[i - moves] == p) {
                 temp = q[i - moves + 1];
@@ -64,6 +65,5 @@ function minimumBribes(q) {
             }
         }
     }
-
-    return bribes;
+    console.log(bribes);
 }
