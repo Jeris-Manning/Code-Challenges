@@ -12,10 +12,12 @@ function sherlockAndAnagrams(s) {
         alphabet[s.charAt(i)] == undefined ? charCount++ : (charCount += 0);
     }
 
-    for (let k = 1; k <= charCount; k++) {
+    for (let k = 1; k < charCount; k++) {
         perm = factorial(charCount) / factorial(charCount - k);
         permCount += perm;
     }
+
+    permCount += factorial(charCount);
 
     return permCount;
 
